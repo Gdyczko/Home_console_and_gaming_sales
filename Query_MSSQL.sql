@@ -15,7 +15,7 @@ FROM
     Games
 ORDER BY 
     Units_m DESC
-
+    
 /* 3. Analysing popular of consoles depending on generation: */
 -- Calculating the sum of units sold in millions for each console generation
 SELECT 
