@@ -1,3 +1,4 @@
+DROP TABLE Console
 CREATE TABLE Console (
     Console_Name NVARCHAR(100),
     [Type] NVARCHAR(50),
@@ -11,7 +12,7 @@ CREATE TABLE Console (
     Remarks NVARCHAR(MAX),
     Link_to_gif NVARCHAR(MAX)
 )
-
+DROP TABLE Games
 CREATE TABLE Games (
     Game_Name NVARCHAR(500),
     System_Full NVARCHAR(100),
@@ -19,5 +20,5 @@ CREATE TABLE Games (
     Publisher NVARCHAR(100),
     Developer NVARCHAR(100),
     Image_URL NVARCHAR(MAX),
-    Release_Date NVARCHAR(100)
+    Release_Date DATE NULL
 )

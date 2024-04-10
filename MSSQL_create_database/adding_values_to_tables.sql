@@ -10,7 +10,7 @@ GO
 
 -- import the file to Games
 BULK INSERT Games
-FROM '/scrapped_data.csv'
+FROM '/scrapped_data_convert.csv'
 WITH
 (
     FORMAT = 'CSV',
