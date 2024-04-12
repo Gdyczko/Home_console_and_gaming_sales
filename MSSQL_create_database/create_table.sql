@@ -7,7 +7,7 @@ CREATE TABLE Console (
     Gen_Years NVARCHAR(50),
     Released_Year INT,
     Generation INT,
-    Discontinuation_Year NVARCHAR(50),
+    Discontinuation_Year INT,
     Units_sold_in_million DECIMAL(10, 2),
     Remarks NVARCHAR(MAX),
     Link_to_gif NVARCHAR(MAX)

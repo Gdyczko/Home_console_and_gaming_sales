@@ -4,3 +4,4 @@ pyvenv.cfg
 share/
 SQL_Server_settings.ipynb
 .vscode/
+.DS_Store

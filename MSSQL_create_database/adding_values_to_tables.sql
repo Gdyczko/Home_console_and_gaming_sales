@@ -1,6 +1,6 @@
--- import the file to Console
+-- import the file to table Console
 BULK INSERT Console
-FROM '/Console_Data.csv'
+FROM '/Console_Data_convert.csv'
 WITH
 (
     FORMAT = 'CSV',
@@ -8,7 +8,7 @@ WITH
 )
 GO
 
--- import the file to Games
+-- import the file to table Games
 BULK INSERT Games
 FROM '/scrapped_data_convert.csv'
 WITH
