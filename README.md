@@ -303,7 +303,7 @@ GROUP BY
 ORDER BY
     Generation
 ```
-![Life of consoles cycle](Images/Life%20of%20consoles%20cycle.png)
+![Life of consoles cycle](images/Life%20of%20consoles%20cycle.png)
 
 From this analysis, we learn that:
 * Generally, except for a few consoles, the next console model appears no earlier than 6 years.
