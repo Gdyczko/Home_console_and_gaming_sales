@@ -53,6 +53,7 @@ ORDER BY
     Units_sold_in_million DESC
 ```
 ![Top 10 Consoles](images/Top%2010%20the%20best%20sold%20consoles.png)
+
 From the analyses abowe, we can infer that:
 * The most units were sold for the PlayStation 2 console - 155 million units.
 * The PlayStation 5 console ranked 10th, with 55 million units sold.
@@ -60,7 +61,7 @@ From the analyses abowe, we can infer that:
 * Three consoles are from Nintendo (Wii / Nintendo).
 * Only two consoles are from Microsoft (Xbox).
 
-## 2. This query identifies the top ten best-selling games along with the number of units sold in millions.
+## 2. Top 10 the best sold games
 The following query, after execution, will display a table of the top 10 games sold the most. The columns will contain information about the games name and the number of units sold in millions.\
 This query was implemented in Python to create a chart displayed below the query.
 ```sql
@@ -73,6 +74,30 @@ ORDER BY
     Units_m DESC
 ```
 ![Top 10 Games](images/Top%2010%20the%20best%20sold%20games.png)
+```sql
+SELECT TOP 10
+    Game_Name,
+    System_Full,
+    Units_m
+FROM
+    Games
+ORDER BY
+    Units_m DESC
+```
+| Game Name                          | System Full                      | Units (millions) |
+|------------------------------------|----------------------------------|------------------|
+| Wii Sports                         | Wii                              | 82.9             |
+| Mario Kart 8 Deluxe                | Nintendo Switch                  | 60.58            |
+| Animal Crossing: New Horizons      | Nintendo Switch                  | 44.79            |
+| Super Mario Bros.                  | Nintendo Entertainment System    | 40.24            |
+| Mario Kart Wii                     | Wii                              | 37.38            |
+| Super Smash Bros. Ultimate         | Nintendo Switch                  | 33.67            |
+| Wii Sports Resort                  | Wii                              | 33.14            |
+| The Legend of Zelda: Breath of the Wild | Nintendo Switch             | 31.61            |
+| New Super Mario Bros. Wii          | Wii                              | 30.32            |
+| Duck Hunt                          | Nintendo Entertainment System    | 28.31            |
+
+
 From the analyses abowe, we can infer that:
 * In the top 10, only games created for Nintendo consoles were included.
 * The game Wii Sports has a significant lead in the number of units sold, with over 80 million units.
@@ -149,7 +174,8 @@ ORDER BY
 | Namco Bandai                 | 175             |
 | 2K Sports                    | 170             |
 | Eidos Interactive            | 167             |
-There are definitely more entries, but not all need to be shown. Detailed information is contained in the [SQL](Query_MSSQL.sql) file.\
+
+There are definitely more entries, but not all need to be shown. Detailed information is contained in the [SQL](Query_MSSQL.sql) file.
 From the presented table, we can read that:
 * Sega clearly dominates over other publishers in terms of game publications - 1252 published games.
 * There are 3350 games in the database whose publisher is unknown.
@@ -169,15 +195,119 @@ GROUP BY
 ORDER BY
     Release_Date
 ```
+![Game_sales_over_time](images/Game%20sales%20over%20time.png)
 
+From the above analyses, it can be concluded that:
+* Occasionally, sudden increases in game sales occur.
+* The largest such jump was recorded around the years 2007/2008 and amounted to over 90 million units sold.
+* Over the analyzed years, there is an upward trend in game sales.
+* However, it should be noted that since 2020, there has been a decrease in game sales, not exceeding 30 million units.
+
+## 6. Analysing market of games depends on kindf of consoles
 This section displays the number of games released on different console platforms and compares game sales across different console platforms.
+```sql
+SELECT
+    System_Full,
+    COUNT(*) [Number_of_games]
+FROM 
+    Games 
+GROUP BY 
+    System_Full
+ORDER BY [Number_of_games] DESC
+```
+| System Full                       | Number of Games |
+|-----------------------------------|-----------------|
+| PlayStation 2                     | 3565            |
+| PlayStation 4                     | 3106            |
+| PlayStation                       | 2707            |
+| Nintendo Switch                   | 2392            |
+| Xbox One                          | 2008            |
+| PlayStation 3                     | 1905            |
+| Xbox 360                          | 1735            |
+| Wii                               | 1676            |
+| Super Nintendo                    | 1211            |
+| Nintendo Entertainment System     | 1108            |
+| Xbox                              | 983             |
+| Sega Genesis                      | 805             |
+| Sega Saturn                       | 739             |
+| GameCube                          | 663             |
+| Sega Dreamcast                    | 655             |
+| Wii U                             | 554             |
+| Atari 2600                        | 501             |
+| Nintendo 64                       | 393             |
+| Sega Master System                | 336             |
+| Intellivision                     | 134             |
+| Atari 5200/7800                   | 132             |
+```sql
+SELECT
+    System_Full,
+    SUM(Units_m) [Number_of_solded_games]
+FROM
+    Games
+GROUP BY
+    System_Full
+ORDER BY
+    [Number_of_solded_games] DESC
+```
+| System Full                       | Number of Solded Games (millions) |
+|-----------------------------------|------------------------------------|
+| PlayStation 2                     | 1259.18                            |
+| Xbox 360                          | 974.64                             |
+| PlayStation 3                     | 964.7                              |
+| Wii                               | 898.84                             |
+| PlayStation 4                     | 849.39                             |
+| PlayStation                       | 717.28                             |
+| Nintendo Switch                   | 664.1                              |
+| Xbox One                          | 309.06                             |
+| Nintendo Entertainment System     | 263.14                             |
+| Xbox                              | 261.35                             |
+| Nintendo 64                       | 221.75                             |
+| Super Nintendo                    | 201.16                             |
+| GameCube                          | 194.22                             |
+| Wii U                             | 97.47                              |
+| Atari 2600                        | 97.36                              |
+| Sega Genesis                      | 48.58                              |
+| Sega Saturn                       | 33.82                              |
+| Sega Dreamcast                    | 16.77                              |
+| Intellivision                     | 9.5                                |
+| Atari 5200/7800                   | 0.04                               |
+| Sega Master System                | 0                                  |
 
-This analysis shows the years of operation of a given console, including generations, and calculates the total years of operation.
+From the above tables, we can infer that:
+* PlayStation Dominance: PlayStation platforms, including PlayStation 2, PlayStation 4, and the original PlayStation, have the highest number of games released, indicating Sony's strong presence and support for its gaming consoles across different generations.
+* Nintendo's Contribution: Nintendo platforms, such as Nintendo Switch, Super Nintendo, and Nintendo Entertainment System (NES), also have a significant number of games released, highlighting Nintendo's commitment to diverse gaming experiences and its iconic franchises.
+* Xbox and Sega: Xbox consoles, represented by Xbox One and Xbox 360, have a substantial library of games, though slightly fewer compared to PlayStation and Nintendo platforms. Meanwhile, older Sega consoles like Sega Genesis and Sega Saturn also have a notable number of games released, showcasing Sega's historical significance in the gaming industry.
+* Wii Era: The Wii console, known for its motion controls and broad appeal, has a considerable number of games released, demonstrating its popularity during its heyday.
+<br/><br/>
+* PlayStation 2 Dominance: PlayStation 2 emerges as the leading gaming platform with the highest number of solded games, indicating its significant popularity and market success during its lifetime.
+* Success of Nintendo Platforms: Nintendo platforms, including Wii, Nintendo Switch, Nintendo Entertainment System (NES), and others, demonstrate strong performance in terms of game sales, highlighting Nintendo's enduring appeal to gamers across generations.
+* Xbox Presence: Xbox consoles, such as Xbox 360 and Xbox One, also show notable sales figures, though generally lower than PlayStation and Nintendo platforms. However, they still represent a significant portion of the gaming market.
+* Legacy Systems: Older systems like Sega Genesis, Atari 2600, and Intellivision have comparatively lower sales numbers, reflecting their historical relevance and the evolution of gaming technology over time.
 
-This query identifies the top-selling games for each console.
+## 7. Life of consoles cycle
+This query provide information about each gaming console's life cycle, including its name, release year, discontinuation year, generation, and the total number of years it was active in the market.
+```sql
+SELECT
+    Console_Name,
+    Released_Year,
+    Discontinuation_Year,
+    Generation,
+    SUM(Discontinuation_Year - Released_Year) [Years]
+FROM
+    Console
+GROUP BY
+    Console_Name,
+    Released_Year,
+    Discontinuation_Year,
+    Generation
+ORDER BY
+    Generation
+```
+![Life of consoles cycle](Images/Life%20of%20consoles%20cycle.png)
 
-This analysis calculates the average sales of game units on individual console platforms and compares the average sales across various console manufacturers.
-
-This query calculates the average sales of a given console within one year.
-
-This analysis identifies the best-selling game for each console.
+From this analysis, we learn that:
+* Generally, except for a few consoles, the next console model appears no earlier than 6 years.
+* Initially, new console generations were released more frequently.
+* The longest-standing console on the market was the Atari 2600 - 15 years.
+* Sony held the PlayStation 2 on the market for the longest time. Others are also long, but not as much as 13 years. According to the available data, the PlayStation 3 and PlayStation 4 have been on the market for the same amount of time so far.
+* Recently, a slight acceleration in the production of newer consoles can be observed, for example, Xbox 360 - 11 years, Xbox One - 7, Xbox Series - currently 4 years.
